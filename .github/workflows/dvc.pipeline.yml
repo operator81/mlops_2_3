@@ -1,0 +1,39 @@
+name: dvc_pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  dvc_process:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11.9'  
+
+      - name: Install dependencies
+        run: |
+          pip install pandas dvc
+          pip install numpy dvc
+          pip install matplotlib dvc
+
+      - name: Load data
+        run: python scripts/data_loading.py  
+
+      - name: Preprocessing data
+        run: python scripts/data_preprocessing.py
+        
+      - name:  Modeling data 
+        run: python scripts/modeling.py
+
+      - name: Visualization data
+        run: python scripts/visualization.py
+
+      - name: DVC Push
+        run: dvc push 
