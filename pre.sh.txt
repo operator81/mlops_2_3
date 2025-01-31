@@ -1,0 +1,10 @@
+#!/bin/bash
+git init
+dvc init
+
+# Добавление данных
+dvc add data/raw/train.csv
+
+# Создание конфигурации DVC
+dvc run -n load_data -d scripts/data_loading.py -o data/processed/train.csv \
+  python scripts/data_loading.py

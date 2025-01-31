@@ -1,0 +1,21 @@
+stages:
+  data_loading:
+    cmd: python scripts/data_loading.py
+    deps:
+      - scripts/data_loading.py
+    
+
+  data_preprocessing:
+    cmd: python scripts/data_preprocessing.py
+    deps:
+      - scripts/data_preprocessing.py
+
+  modeling:
+    cmd: python scripts/modeling.py
+    deps:
+      - scripts/modeling.py
+
+  visualization:
+    cmd: python scripts/visualization.py
+    deps:
+      - scripts/visualization.py
